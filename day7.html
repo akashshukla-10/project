@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Random Photos</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #b03b3b;
+      margin: 0;
+      padding: 20px;
+      text-align: center;
+    }
+
+    h1 {
+      color: white;
+    }
+
+    #gallery {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+      margin: 20px auto;
+      max-width: 800px;
+    }
+
+    .photo {
+      width: 100%;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      height: 200px;
+      object-fit: cover;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      background-color: #ffffff;
+      color: #b03b3b;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #f0f0f0;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Random Photos</h1>
+  <div id="gallery"></div>
+  <button onclick="loadImages()">Load New Images</button>
+
+  <script>
+    function getRandomImageUrl() {
+      // Using Picsum Photos as Lorem Pixel is discontinued
+      const width = 300;
+      const height = 200;
+      return `https://picsum.photos/${width}/${height}?random=${Math.floor(Math.random() * 1000)}`;
+    }
+
+    function loadImages() {
+      const gallery = document.getElementById('gallery');
+      gallery.innerHTML = ''; // Clear previous images
+
+      for (let i = 0; i < 6; i++) {
+        const img = document.createElement('img');
+        img.src = getRandomImageUrl();
+        img.className = 'photo';
+        gallery.appendChild(img);
+      }
+    }
+
+    // Load images when the page loads
+    window.onload = loadImages;
+  </script>
+
+</body>
+</html>
